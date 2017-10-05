@@ -1,0 +1,36 @@
+{% from "_includes/forms" import textField, lightswitchField %}
+
+{{ textField({
+    label: 'API Key'|t('commerce'),
+    id: 'apiKey',
+    class: 'ltr',
+    name: 'apiKey',
+    value: gateway.apiKey,
+    errors: gateway.getErrors('apiKey')
+}) }}
+
+{{ textField({
+    label: 'Password'|t('commerce'),
+    id: 'password',
+    class: 'ltr',
+    name: 'password',
+    value: gateway.password,
+    errors: gateway.getErrors('password')
+}) }}
+
+{{ textField({
+    label: 'Client side encryption key'|t('commerce'),
+    id: 'CSEKey',
+    class: 'ltr',
+    name: 'CSEKey',
+    value: gateway.CSEKey,
+    errors: gateway.getErrors('CSEKey')
+}) }}
+
+
+ {{ lightswitchField({
+     label: "Test mode?"|t('commerce'),
+     name: 'testMode',
+     on: gateway.testMode,
+     errors: gateway.getErrors('testMode'),
+ }) }}
