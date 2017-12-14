@@ -11,8 +11,12 @@ function initEWay() {
             $cvv = $form.find('[name=cvv]');
             var key = $wrapper.data('key');
 
-            $form.append('<input type="hidden" name="encryptedCardNumber" value="'+eCrypt.encryptValue($number.val(), key)+'"/>');
-            $form.append('<input type="hidden" name="encryptedCardCvv" value="'+eCrypt.encryptValue($cvv.val(), key)+'"/>');
+            if ($number.length) {
+                $form.append('<input type="hidden" name="encryptedCardNumber" value="'+eCrypt.encryptValue($number.val(), key)+'"/>');
+            }
+            if ($cvv.length) {
+                $form.append('<input type="hidden" name="encryptedCardCvv" value="' + eCrypt.encryptValue($cvv.val(), key) + '"/>');
+            }
 
             $number.prop('disabled', true);
             $cvv.prop('disabled', true);

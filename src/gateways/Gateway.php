@@ -63,27 +63,18 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
+    public function getPaymentConfirmationFormHtml(array $params): string
+    {
+        return $this->_displayFormHtml($params, 'commerce-eway/confirmationForm');
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     public function getPaymentFormHtml(array $params)
     {
-        $defaults = [
-            'gateway' => $this,
-            'paymentForm' => $this->getPaymentFormModel()
-        ];
-
-        $params = array_merge($defaults, $params);
-
-        $view = Craft::$app->getView();
-
-        $previousMode = $view->getTemplateMode();
-        $view->setTemplateMode(View::TEMPLATE_MODE_CP);
-
-        $view->registerJsFile('https://secure.ewaypayments.com/scripts/eCrypt.min.js');
-        $view->registerAssetBundle(EwayPaymentBundle::class);
-
-        $html = Craft::$app->getView()->renderTemplate('commerce-eway/paymentForm', $params);
-        $view->setTemplateMode($previousMode);
-
-        return $html;
+        return $this->_displayFormHtml($params, 'commerce-eway/paymentForm');
     }
 
     /**
@@ -100,6 +91,20 @@ class Gateway extends CreditCardGateway
     public function getSettingsHtml()
     {
         return Craft::$app->getView()->renderTemplate('commerce-eway/gatewaySettings', ['gateway' => $this]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function populateRequest(array &$request, BasePaymentForm $paymentForm = null)
+    {
+        /** @var EwayPaymentForm $paymentForm */
+        if ($paymentForm) {
+            $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber ?? null;
+            $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv ?? null;
+
+            $request['cardReference'] = $paymentForm->cardReference ?? null;
+        }
     }
 
     // Protected Methods
@@ -152,20 +157,38 @@ class Gateway extends CreditCardGateway
         return '\\'.OmnipayGateway::class;
     }
 
+    // Private Methods
+    // =========================================================================
+
     /**
-     * @inheritdoc
+     * Display a payment form from HTML based on params and template path
+     *
+     * @param array  $params   Parameters to use
+     * @param string $template Template to use
+     *
+     * @return string
+     * @throws \Throwable if unable to render the template
      */
-    public function populateRequest(array &$request, BasePaymentForm $paymentForm = null)
+    private function _displayFormHtml($params, $template): string
     {
-        /** @var EwayPaymentForm $paymentForm */
-        if ($paymentForm) {
-            $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber ?? null;
-            $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv ?? null;
+        $defaults = [
+            'gateway' => $this,
+            'paymentForm' => $this->getPaymentFormModel()
+        ];
 
-            $request['cardReference'] = $paymentForm->cardReference ?? null;
-        }
+        $params = array_merge($defaults, $params);
 
+        $view = Craft::$app->getView();
 
+        $previousMode = $view->getTemplateMode();
+        $view->setTemplateMode(View::TEMPLATE_MODE_CP);
 
+        $view->registerJsFile('https://secure.ewaypayments.com/scripts/eCrypt.min.js');
+        $view->registerAssetBundle(EwayPaymentBundle::class);
+
+        $html = Craft::$app->getView()->renderTemplate($template, $params);
+        $view->setTemplateMode($previousMode);
+
+        return $html;
     }
 }

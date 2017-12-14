@@ -1,0 +1,27 @@
+{% import "_includes/forms" as forms %}
+
+<div class="eway-form" data-key="{{ gateway.CSEKey ?? '' }}">
+    <!-- Card Number -->
+    <fieldset class="card-data">
+        <div class="multitext">
+            <div class="multitextrow">
+
+                {{ forms.text({
+                    type: 'tel',
+                    name: 'cvv',
+                    placeholder: "CVV"|t('commerce'),
+                    class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
+                    value: paymentForm.cvv
+                }) }}
+            </div>
+        </div>
+
+        {% set errors = [] %}
+        {% for attributeKey in ['cvv'] %}
+            {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
+        {% endfor %}
+
+        {{ forms.errorList(errors) }}
+
+    </fieldset>
+</div>
