@@ -3,12 +3,18 @@
 namespace craft\commerce\eway\gateways;
 
 use Craft;
+use craft\commerce\errors\PaymentException;
 use craft\commerce\eway\EwayPaymentBundle;
 use craft\commerce\eway\models\EwayPaymentForm;
 use craft\commerce\models\payments\BasePaymentForm;
+use craft\commerce\models\PaymentSource;
 use craft\commerce\omnipay\base\CreditCardGateway;
+use craft\helpers\StringHelper;
 use craft\web\View;
 use Omnipay\Common\AbstractGateway;
+use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\ResponseInterface;
+use Omnipay\Eway\Message\RapidResponse;
 use Omnipay\Omnipay;
 use Omnipay\Eway\RapidDirectGateway as OmnipayGateway;
 
@@ -117,6 +123,30 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
+    protected function extractCardReference(ResponseInterface $response): string
+    {
+        /** @var RapidResponse $response */
+        if ($response->getCode() !== 'A2000') {
+            throw new PaymentException($response->getMessage());
+        }
+
+        return $response->getCardReference();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    protected function extractPaymentSourceDescription(ResponseInterface $response): string
+    {
+        $data = $response->getData();
+
+        return Craft::t('commerce-eway', 'Payment card {masked}', ['masked' => $data['Customer']['CardDetails']['Number']]);
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function getGatewayClassName()
     {
         return '\\'.OmnipayGateway::class;
@@ -128,9 +158,14 @@ class Gateway extends CreditCardGateway
     public function populateRequest(array &$request, BasePaymentForm $paymentForm = null)
     {
         /** @var EwayPaymentForm $paymentForm */
-        $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber;
-        $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv;
+        if ($paymentForm) {
+            $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber ?? null;
+            $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv ?? null;
+
+            $request['cardReference'] = $paymentForm->cardReference ?? null;
+        }
+
+
+
     }
-
-
 }

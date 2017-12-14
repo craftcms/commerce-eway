@@ -3,6 +3,7 @@
 namespace craft\commerce\eway\models;
 
 use craft\commerce\models\payments\CreditCardPaymentForm;
+use craft\commerce\models\PaymentSource;
 
 /**
  * Eway Payment form model.
@@ -23,6 +24,11 @@ class EwayPaymentForm extends CreditCardPaymentForm
     public $encryptedCardCvv;
 
     /**
+     * @var string credit card reference
+     */
+    public $cardReference;
+
+    /**
      * @inheritdoc
      */
     public function setAttributes($values, $safeOnly = true)
@@ -33,12 +39,24 @@ class EwayPaymentForm extends CreditCardPaymentForm
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function populateFromPaymentSource(PaymentSource $paymentSource)
     {
-        return [
-            [['firstName', 'lastName', 'month', 'year', 'encryptedCardNumber', 'encryptedCardCvv'], 'required'],
-            [['month'], 'integer', 'integerOnly' => true, 'min' => 1, 'max' => 12],
-            [['year'], 'integer', 'integerOnly' => true, 'min' => date('Y'), 'max' => date('Y') + 12],
-        ];
+        $this->cardReference = $paymentSource->token;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules(): array
+    {
+        if (empty($this->cardReference)) {
+            return [
+                [['firstName', 'lastName', 'month', 'year', 'encryptedCardNumber', 'encryptedCardCvv'], 'required'],
+                [['month'], 'integer', 'integerOnly' => true, 'min' => 1, 'max' => 12],
+                [['year'], 'integer', 'integerOnly' => true, 'min' => date('Y'), 'max' => date('Y') + 12],
+            ];
+        }
+
+        return [];
     }
 }
