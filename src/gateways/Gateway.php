@@ -77,7 +77,7 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    public function getPaymentFormModel()
+    public function getPaymentFormModel(): BasePaymentForm
     {
         return new EwayPaymentForm();
     }
