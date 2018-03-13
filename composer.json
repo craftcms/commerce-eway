@@ -1,6 +1,6 @@
 {
   "name": "craftcms/commerce-eway",
-  "description": "eWay integration for Craft Commerce",
+  "description": "eWay payment gateway plugin for Craft Commerce 2",
   "version": "1.0.0",
   "type": "craft-plugin",
   "keywords": [
@@ -25,7 +25,7 @@
     "rss": "https://github.com/craftcms/commerce-eway/commits/master.atom"
   },
   "require": {
-    "craftcms/commerce": "*",
+    "craftcms/commerce": "^2.0.0-alpha.5",
     "omnipay/eway": "~2.0"
   },
   "autoload": {
@@ -33,12 +33,7 @@
       "craft\\commerce\\eway\\": "src/"
     }
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
+
   "extra": {
     "name": "eWay",
     "handle": "commerce-eway",

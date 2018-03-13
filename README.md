@@ -1,4 +1,4 @@
-eWay Direct payment gateway for Craft Commerce
+eWay payment gateway plugin for Craft Commerce 2
 =======================
 
 This plugin provides [eWay](https://www.eway.com.au/) integration for [Craft Commerce](https://craftcommerce.com/).
@@ -7,7 +7,7 @@ It provides the Eway Direct gateway.
 
 ## Requirements
 
-This plugin requires Craft Commerce 2.0.1-alpha.4 or later.
+This plugin requires Craft Commerce 2.0.0-alpha.5 or later.
 
 ## Installation
 
