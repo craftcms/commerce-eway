@@ -1,4 +1,4 @@
-# Release Notes for Stripe for Craft Commerce
+# Release Notes for eWay for Craft Commerce
 
 ## 1.0.0.1 - 2018-12-10
 
