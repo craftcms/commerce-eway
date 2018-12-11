@@ -1,9 +1,6 @@
-eWay payment gateway plugin for Craft Commerce 2
-=======================
+# eWay for Craft Commerce
 
-This plugin provides [eWay](https://www.eway.com.au/) integration for [Craft Commerce](https://craftcommerce.com/).
-
-It provides the Eway Direct gateway.
+This plugin provides an [eWay](https://www.eway.com.au/) integration for [Craft Commerce](https://craftcms.com/commerce).
 
 ## Requirements
 
@@ -11,17 +8,26 @@ This plugin requires Craft Commerce 2.0.0-alpha.5 or later.
 
 ## Installation
 
-To install the plugin, follow these instructions.
+You can install this plugin from the Plugin Store or with Composer.
 
-1. Open your terminal and go to your Craft project:
+#### From the Plugin Store
 
-        cd /path/to/project
+Go to the Plugin Store in your project’s Control Panel and search for “eWay for Craft Commerce”. Then click on the “Install” button in its modal window.
 
-2. Then tell Composer to load the plugin:
+#### With Composer
 
-        composer require craftcms/commerce-eway
+Open your terminal and run the following commands:
 
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for eWay.
+```bash
+# go to the project directory
+cd /path/to/my-project.test
+
+# tell Composer to load the plugin
+composer require craftcms/commerce-eway
+
+# tell Craft to install the plugin
+./craft install/plugin commerce-eway
+```
 
 ## Setup
 
