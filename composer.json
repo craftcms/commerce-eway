@@ -38,8 +38,6 @@
 
   "extra": {
     "name": "eWay for Craft Commerce",
-    "handle": "commerce-eway",
-    "changelogUrl": "https://raw.githubusercontent.com/craftcms/commerce-eway/master/CHANGELOG.md",
-    "downloadUrl": "https://github.com/craftcms/commerce-eway/archive/master.zip"
+    "handle": "commerce-eway"
   }
 }
