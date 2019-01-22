@@ -1,5 +1,10 @@
 # Release Notes for eWay for Craft Commerce
 
+## 1.1.0 - 2019-01-22
+
+### Changed
+- Switched to an MIT license.
+
 ## 1.0.0.1 - 2018-12-10
 
 ### Changed
