@@ -1,4 +1,4 @@
-{% from "_includes/forms" import textField, lightswitchField %}
+{% from "_includes/forms" import textField, lightswitchField, autosuggestField %}
 
 {{ lightswitchField({
     label: "Should commerce send cart information to gateway when making transactions."|t('commerce'),
@@ -8,30 +8,33 @@
     errors: gateway.getErrors('sendCartInfo'),
 }) }}
 
-{{ textField({
+{{ autosuggestField({
     label: 'API Key'|t('commerce'),
     id: 'apiKey',
     class: 'ltr',
     name: 'apiKey',
     value: gateway.apiKey,
+    suggestEnvVars: true,
     errors: gateway.getErrors('apiKey')
 }) }}
 
-{{ textField({
+{{ autosuggestField({
     label: 'Password'|t('commerce'),
     id: 'password',
     class: 'ltr',
     name: 'password',
     value: gateway.password,
+    suggestEnvVars: true,
     errors: gateway.getErrors('password')
 }) }}
 
-{{ textField({
+{{ autosuggestField({
     label: 'Client side encryption key'|t('commerce'),
     id: 'CSEKey',
     class: 'ltr',
     name: 'CSEKey',
     value: gateway.CSEKey,
+    suggestEnvVars: true,
     errors: gateway.getErrors('CSEKey')
 }) }}
 

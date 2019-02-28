@@ -6,7 +6,7 @@ This plugin provides an [eWay](https://www.eway.com.au/) integration for [Craft 
 
 ## Requirements
 
-This plugin requires Craft Commerce 2.0.0-alpha.5 or later.
+This plugin requires Craft CMS 3.1.5 and Craft Commerce 2.0.0 or later.
 
 ## Installation
 
@@ -34,3 +34,5 @@ composer require craftcms/commerce-eway
 ## Setup
 
 To add an eWay payment gateway, go to Commerce → Settings → Gateways, create a new gateway, and set the gateway type to “eWay Direct”.
+
+> **Tip:** eWAY’s API settings can be set to environment variables. See [Environmental Configuration](https://docs.craftcms.com/v3/config/environments.html) in the Craft docs for more information.

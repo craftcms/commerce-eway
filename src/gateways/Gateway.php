@@ -120,8 +120,8 @@ class Gateway extends CreditCardGateway
         /** @var OmnipayGateway $gateway */
         $gateway = Omnipay::create($this->getGatewayClassName());
 
-        $gateway->setApiKey($this->apiKey);
-        $gateway->setPassword($this->password);
+        $gateway->setApiKey(Craft::parseEnv($this->apiKey));
+        $gateway->setPassword(Craft::parseEnv($this->password));
         $gateway->setTestMode($this->testMode);
 
         return $gateway;
