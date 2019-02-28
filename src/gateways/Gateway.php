@@ -118,7 +118,7 @@ class Gateway extends CreditCardGateway
     protected function createGateway(): AbstractGateway
     {
         /** @var OmnipayGateway $gateway */
-        $gateway = Omnipay::create($this->getGatewayClassName());
+        $gateway = static::createOmnipayGateway($this->getGatewayClassName());
 
         $gateway->setApiKey(Craft::parseEnv($this->apiKey));
         $gateway->setPassword(Craft::parseEnv($this->password));
