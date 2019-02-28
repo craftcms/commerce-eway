@@ -1,5 +1,10 @@
 # Release Notes for eWay for Craft Commerce
 
+## Unreleased
+
+### Changed
+- eWay for Craft Commerce now uses Omnipay v3.
+
 ## 1.1.0 - 2019-01-22
 
 ### Changed
