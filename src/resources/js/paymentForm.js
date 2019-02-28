@@ -1,5 +1,5 @@
 function initEWay() {
-    // Because this might get executed before Stripe is loaded.
+    // Because this might get executed before eWay is loaded.
     if (typeof eCrypt === "undefined") {
         setTimeout(initEWay, 200);
     } else {
