@@ -5,7 +5,7 @@
 ### Changed
 - eWay for Craft Commerce now requires Craft 3.1.5.
 - eWay for Craft Commerce now uses Omnipay v3.
-- Gateway settings can now be set to environment variables.
+- The API Key, Password, and Client side encryption key settings can be set to environment variables.
 
 ## 1.1.0 - 2019-01-22
 
