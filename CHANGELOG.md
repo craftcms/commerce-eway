@@ -1,6 +1,6 @@
 # Release Notes for eWay for Craft Commerce
 
-## Unreleased
+## 2.0.0 - 2019-03-04
 
 ### Changed
 - eWay for Craft Commerce now requires Craft 3.1.5.
