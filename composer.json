@@ -1,6 +1,6 @@
 {
   "name": "craftcms/commerce-eway",
-  "description": "eWay integration for Craft Commerce 2",
+  "description": "eWay integration for Craft Commerce 2 & 3",
   "version": "2.1.0",
   "type": "craft-plugin",
   "keywords": [
