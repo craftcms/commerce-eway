@@ -1,5 +1,11 @@
 # Release Notes for eWay for Craft Commerce
 
+## 3.0.0
+
+### Changed
+- The plugin now requires Craft 3.6 and Commerce 3.3 or later.
+- The plugin now requires Guzzle 7.
+
 ## 2.1.0.1 - 2019-07-24
 
 ### Changed
