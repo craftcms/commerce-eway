@@ -1,47 +1,47 @@
 {% from "_includes/forms" import textField, lightswitchField, autosuggestField %}
 
 {{ lightswitchField({
-    label: "Should commerce send cart information to gateway when making transactions."|t('commerce'),
-    id: 'sendCartInfo',
-    name: 'sendCartInfo',
-    on: gateway.sendCartInfo,
-    errors: gateway.getErrors('sendCartInfo'),
+  label: "Should commerce send cart information to gateway when making transactions."|t('commerce'),
+  id: 'sendCartInfo',
+  name: 'sendCartInfo',
+  on: gateway.sendCartInfo,
+  errors: gateway.getErrors('sendCartInfo'),
 }) }}
 
 {{ autosuggestField({
-    label: 'API Key'|t('commerce'),
-    id: 'apiKey',
-    class: 'ltr',
-    name: 'apiKey',
-    value: gateway.apiKey,
-    suggestEnvVars: true,
-    errors: gateway.getErrors('apiKey')
+  label: 'API Key'|t('commerce'),
+  id: 'apiKey',
+  class: 'ltr',
+  name: 'apiKey',
+  value: gateway.apiKey,
+  suggestEnvVars: true,
+  errors: gateway.getErrors('apiKey')
 }) }}
 
 {{ autosuggestField({
-    label: 'Password'|t('commerce'),
-    id: 'password',
-    class: 'ltr',
-    name: 'password',
-    value: gateway.password,
-    suggestEnvVars: true,
-    errors: gateway.getErrors('password')
+  label: 'Password'|t('commerce'),
+  id: 'password',
+  class: 'ltr',
+  name: 'password',
+  value: gateway.password,
+  suggestEnvVars: true,
+  errors: gateway.getErrors('password')
 }) }}
 
 {{ autosuggestField({
-    label: 'Client side encryption key'|t('commerce'),
-    id: 'CSEKey',
-    class: 'ltr',
-    name: 'CSEKey',
-    value: gateway.CSEKey,
-    suggestEnvVars: true,
-    errors: gateway.getErrors('CSEKey')
+  label: 'Client side encryption key'|t('commerce'),
+  id: 'CSEKey',
+  class: 'ltr',
+  name: 'CSEKey',
+  value: gateway.CSEKey,
+  suggestEnvVars: true,
+  errors: gateway.getErrors('CSEKey')
 }) }}
 
 
  {{ lightswitchField({
-     label: "Test mode?"|t('commerce'),
-     name: 'testMode',
-     on: gateway.testMode,
-     errors: gateway.getErrors('testMode'),
+    label: "Test mode?"|t('commerce'),
+    name: 'testMode',
+    on: gateway.testMode,
+    errors: gateway.getErrors('testMode'),
  }) }}

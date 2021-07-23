@@ -23,9 +23,6 @@ use Omnipay\Eway\RapidDirectGateway as OmnipayGateway;
  */
 class Gateway extends CreditCardGateway
 {
-    // Properties
-    // =========================================================================
-
     /**
      * @var string
      */
@@ -50,9 +47,6 @@ class Gateway extends CreditCardGateway
      * @var bool Whether cart information should be sent to the payment gateway
      */
     public $sendCartInfo = false;
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
@@ -109,9 +103,6 @@ class Gateway extends CreditCardGateway
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * @inheritdoc
      */
@@ -158,9 +149,6 @@ class Gateway extends CreditCardGateway
     {
         return '\\'.OmnipayGateway::class;
     }
-
-    // Private Methods
-    // =========================================================================
 
     /**
      * Display a payment form from HTML based on params and template path
