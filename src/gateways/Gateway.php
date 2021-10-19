@@ -3,11 +3,13 @@
 namespace craft\commerce\eway\gateways;
 
 use Craft;
+use craft\commerce\controllers\PaymentsController;
 use craft\commerce\errors\PaymentException;
 use craft\commerce\eway\EwayPaymentBundle;
 use craft\commerce\eway\models\EwayPaymentForm;
 use craft\commerce\models\payments\BasePaymentForm;
 use craft\commerce\omnipay\base\CreditCardGateway;
+use craft\helpers\Html;
 use craft\web\View;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\ResponseInterface;
@@ -164,9 +166,11 @@ class Gateway extends CreditCardGateway
      */
     private function _displayFormHtml(array $params, string $template): string
     {
+        $paymentFormNamespace = sprintf('%s[%s]', PaymentsController::PAYMENT_FORM_NAMESPACE, $this->handle);
         $defaults = [
             'gateway' => $this,
-            'paymentForm' => $this->getPaymentFormModel()
+            'paymentForm' => $this->getPaymentFormModel(),
+            'paymentFormNamespace' => $paymentFormNamespace,
         ];
 
         $params = array_merge($defaults, $params);
@@ -180,6 +184,8 @@ class Gateway extends CreditCardGateway
         $view->registerAssetBundle(EwayPaymentBundle::class);
 
         $html = Craft::$app->getView()->renderTemplate($template, $params);
+        $html = Html::namespaceInputs($html, $paymentFormNamespace);
+
         $view->setTemplateMode($previousMode);
 
         return $html;
