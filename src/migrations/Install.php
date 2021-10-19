@@ -11,6 +11,7 @@ use Craft;
 use craft\commerce\worldpay\gateways\Gateway;
 use craft\db\Migration;
 use craft\db\Query;
+use yii\db\Exception;
 
 /**
  * Installation Migration
@@ -49,8 +50,9 @@ class Install extends Migration
      * Converts any old school eWay gateways to this one
      *
      * @return void
+     * @throws Exception
      */
-    private function _convertGateways()
+    private function _convertGateways(): void
     {
         $gateways = (new Query())
             ->select(['id'])

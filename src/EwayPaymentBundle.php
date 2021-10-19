@@ -7,7 +7,7 @@
 
 namespace craft\commerce\eway;
 
-use craft\web\AssetBundle;
+use yii\web\AssetBundle;
 
 /**
  * Asset bundle for the Dashboard
@@ -17,7 +17,7 @@ class EwayPaymentBundle extends AssetBundle
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = '@craft/commerce/eway/resources';
 
