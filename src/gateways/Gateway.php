@@ -166,11 +166,10 @@ class Gateway extends CreditCardGateway
      */
     private function _displayFormHtml(array $params, string $template): string
     {
-        $paymentFormNamespace = sprintf('%s[%s]', PaymentsController::PAYMENT_FORM_NAMESPACE, $this->handle);
         $defaults = [
             'gateway' => $this,
             'paymentForm' => $this->getPaymentFormModel(),
-            'paymentFormNamespace' => $paymentFormNamespace,
+            'handle' => $this->handle,
         ];
 
         $params = array_merge($defaults, $params);
@@ -184,7 +183,6 @@ class Gateway extends CreditCardGateway
         $view->registerAssetBundle(EwayPaymentBundle::class);
 
         $html = Craft::$app->getView()->renderTemplate($template, $params);
-        $html = Html::namespaceInputs($html, $paymentFormNamespace);
 
         $view->setTemplateMode($previousMode);
 
