@@ -8,7 +8,7 @@
 namespace craft\commerce\eway\migrations;
 
 use Craft;
-use craft\commerce\worldpay\gateways\Gateway;
+use craft\commerce\eway\gateways\Gateway;
 use craft\db\Migration;
 use craft\db\Query;
 
@@ -61,7 +61,6 @@ class Install extends Migration
         $dbConnection = Craft::$app->getDb();
 
         foreach ($gateways as $gateway) {
-
             $values = [
                 'type' => Gateway::class,
             ];
@@ -70,6 +69,5 @@ class Install extends Migration
                 ->update('{{%commerce_gateways}}', $values, ['id' => $gateway['id']])
                 ->execute();
         }
-
     }
 }
