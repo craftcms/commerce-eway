@@ -146,7 +146,7 @@ class Gateway extends CreditCardGateway
      */
     protected function getGatewayClassName()
     {
-        return '\\'.OmnipayGateway::class;
+        return '\\' . OmnipayGateway::class;
     }
 
     /**
@@ -162,7 +162,7 @@ class Gateway extends CreditCardGateway
     {
         $defaults = [
             'gateway' => $this,
-            'paymentForm' => $this->getPaymentFormModel()
+            'paymentForm' => $this->getPaymentFormModel(),
         ];
 
         $params = array_merge($defaults, $params);
