@@ -45,5 +45,13 @@
       "yiisoft/yii2-composer": true,
       "craftcms/plugin-installer": true
     }
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev",
+  "require-dev": {
+    "craftcms/phpstan": "dev-main"
+  },
+  "scripts": {
+    "phpstan": "phpstan --memory-limit=1G"
   }
 }

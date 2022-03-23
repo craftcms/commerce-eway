@@ -12,7 +12,6 @@ use craft\web\View;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Eway\Message\RapidResponse;
-use Omnipay\Omnipay;
 use Omnipay\Eway\RapidDirectGateway as OmnipayGateway;
 
 /**
@@ -94,7 +93,7 @@ class Gateway extends CreditCardGateway
      */
     public function populateRequest(array &$request, BasePaymentForm $paymentForm = null)
     {
-        /** @var EwayPaymentForm $paymentForm */
+        /** @var EwayPaymentForm|null $paymentForm */
         if ($paymentForm) {
             $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber ?? null;
             $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv ?? null;

@@ -14,17 +14,17 @@ use craft\commerce\models\PaymentSource;
 class EwayPaymentForm extends CreditCardPaymentForm
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $encryptedCardNumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $encryptedCardCvv;
 
     /**
-     * @var string credit card reference
+     * @var string|null credit card reference
      */
     public $cardReference;
 
