@@ -3,7 +3,6 @@
 namespace craft\commerce\eway\gateways;
 
 use Craft;
-use craft\commerce\controllers\PaymentsController;
 use craft\commerce\errors\PaymentException;
 use craft\commerce\eway\EwayPaymentBundle;
 use craft\commerce\eway\models\EwayPaymentForm;
@@ -96,14 +95,14 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    public function populateRequest(array &$request, BasePaymentForm $form = null): void
+    public function populateRequest(array &$request, BasePaymentForm $paymentForm = null): void
     {
         /** @var EwayPaymentForm|null $paymentForm */
         if ($paymentForm) {
             $request['encryptedCardNumber'] = $paymentForm->encryptedCardNumber ?? null;
             $request['encryptedCardCvv'] = $paymentForm->encryptedCardCvv ?? null;
 
-            $request['cardReference'] = $form->cardReference ?? null;
+            $request['cardReference'] = $paymentForm->cardReference ?? null;
         }
     }
 
