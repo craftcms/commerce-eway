@@ -16,30 +16,22 @@ class EwayPaymentForm extends CreditCardPaymentForm
     /**
      * @var string|null
      */
-    public $encryptedCardNumber;
+    public ?string $encryptedCardNumber = null;
 
     /**
      * @var string|null
      */
-    public $encryptedCardCvv;
+    public ?string $encryptedCardCvv = null;
 
     /**
      * @var string|null credit card reference
      */
-    public $cardReference;
+    public ?string $cardReference = null;
 
     /**
      * @inheritdoc
      */
-    public function setAttributes($values, $safeOnly = true)
-    {
-        parent::setAttributes($values, $safeOnly);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function populateFromPaymentSource(PaymentSource $paymentSource)
+    public function populateFromPaymentSource(PaymentSource $paymentSource): void
     {
         $this->cardReference = $paymentSource->token;
     }

@@ -8,44 +8,48 @@ use craft\commerce\eway\EwayPaymentBundle;
 use craft\commerce\eway\models\EwayPaymentForm;
 use craft\commerce\models\payments\BasePaymentForm;
 use craft\commerce\omnipay\base\CreditCardGateway;
+use craft\helpers\Html;
 use craft\web\View;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Eway\Message\RapidResponse;
 use Omnipay\Eway\RapidDirectGateway as OmnipayGateway;
+use Throwable;
 
 /**
  * Gateway represents eWay Rapid Direct gateway
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @since     1.0
+ *
+ * @property-read null|string $settingsHtml
  */
 class Gateway extends CreditCardGateway
 {
     /**
-     * @var string
+     * @var string|null
      */
-    public $apiKey;
+    public ?string $apiKey = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $password;
+    public ?string $password = null;
 
     /**
      * @var boolean
      */
-    public $testMode;
+    public bool $testMode = false;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $CSEKey;
+    public ?string $CSEKey = null;
 
     /**
      * @var bool Whether cart information should be sent to the payment gateway
      */
-    public $sendCartInfo = false;
+    public bool $sendCartInfo = false;
 
     /**
      * @inheritdoc
@@ -67,7 +71,7 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    public function getPaymentFormHtml(array $params)
+    public function getPaymentFormHtml(array $params): ?string
     {
         return $this->_displayFormHtml($params, 'commerce-eway/paymentForm');
     }
@@ -83,7 +87,7 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate('commerce-eway/gatewaySettings', ['gateway' => $this]);
     }
@@ -91,7 +95,7 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    public function populateRequest(array &$request, BasePaymentForm $paymentForm = null)
+    public function populateRequest(array &$request, BasePaymentForm $paymentForm = null): void
     {
         /** @var EwayPaymentForm|null $paymentForm */
         if ($paymentForm) {
@@ -144,7 +148,7 @@ class Gateway extends CreditCardGateway
     /**
      * @inheritdoc
      */
-    protected function getGatewayClassName()
+    protected function getGatewayClassName(): ?string
     {
         return '\\' . OmnipayGateway::class;
     }
@@ -152,17 +156,18 @@ class Gateway extends CreditCardGateway
     /**
      * Display a payment form from HTML based on params and template path
      *
-     * @param array  $params   Parameters to use
+     * @param array $params   Parameters to use
      * @param string $template Template to use
      *
      * @return string
-     * @throws \Throwable if unable to render the template
+     * @throws Throwable if unable to render the template
      */
-    private function _displayFormHtml($params, $template): string
+    private function _displayFormHtml(array $params, string $template): string
     {
         $defaults = [
             'gateway' => $this,
             'paymentForm' => $this->getPaymentFormModel(),
+            'handle' => $this->handle,
         ];
 
         $params = array_merge($defaults, $params);
@@ -176,6 +181,7 @@ class Gateway extends CreditCardGateway
         $view->registerAssetBundle(EwayPaymentBundle::class);
 
         $html = Craft::$app->getView()->renderTemplate($template, $params);
+
         $view->setTemplateMode($previousMode);
 
         return $html;

@@ -6,7 +6,7 @@ This plugin provides an [eWay](https://www.eway.com.au/) integration for [Craft 
 
 ## Requirements
 
-This plugin requires Craft CMS 3.6 and Craft Commerce 3.3 or later.
+This plugin requires Craft CMS 4.0 and Craft Commerce 4.0 or later.
 
 ## Installation
 
