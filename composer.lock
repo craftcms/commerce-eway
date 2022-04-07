@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "307bdef5a052c07e1cc08ff61fcc5e05",
+    "content-hash": "6907fd13648a213cd665e9498b0874e6",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -930,16 +930,16 @@
         },
         {
             "name": "craftcms/commerce-omnipay",
-            "version": "4.0.0-beta.1",
+            "version": "4.0.0-beta.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/commerce-omnipay.git",
-                "reference": "612677b85bea183c99239e805abc63def548fc6a"
+                "reference": "362b6b13fc0d1cef783ec529793270e97ebc235b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/commerce-omnipay/zipball/612677b85bea183c99239e805abc63def548fc6a",
-                "reference": "612677b85bea183c99239e805abc63def548fc6a",
+                "url": "https://api.github.com/repos/craftcms/commerce-omnipay/zipball/362b6b13fc0d1cef783ec529793270e97ebc235b",
+                "reference": "362b6b13fc0d1cef783ec529793270e97ebc235b",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +987,7 @@
                 "rss": "https://github.com/craftcms/commerce-omnipay/commits/master.atom",
                 "source": "https://github.com/craftcms/commerce-omnipay"
             },
-            "time": "2022-04-07T12:48:44+00:00"
+            "time": "2022-04-07T13:36:44+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
