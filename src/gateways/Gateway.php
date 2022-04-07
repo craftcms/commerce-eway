@@ -81,7 +81,7 @@ class Gateway extends CreditCardGateway
      */
     public function getTestMode(bool $parse = true): bool|string
     {
-        return $parse ? App::parseEnv($this->_testMode) : $this->_testMode;
+        return $parse ? App::parseBooleanEnv($this->_testMode) : $this->_testMode;
     }
 
     /**
