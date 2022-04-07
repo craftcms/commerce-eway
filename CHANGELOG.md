@@ -1,5 +1,13 @@
 # Release Notes for eWay for Craft Commerce
 
+## Unreleased
+
+### Added
+- Added Craft CMS 4 and Craft Commerce 4 compatibility.
+
+### Changed
+- eWay Rapid gateway settings now support environment variables.
+
 ## 3.0.0 - 2021-04-20
 
 ### Changed
