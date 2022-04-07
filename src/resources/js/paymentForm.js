@@ -14,7 +14,7 @@ function initEWay() {
 
       if ($number) {
         var numInput = document.createElement('input');
-        numInput.type = 'text';
+        numInput.type = 'hidden';
         numInput.name = paymentFormNamespace + '[encryptedCardNumber]';
         numInput.value = eCrypt.encryptValue($number.value, key);
         $form.appendChild(numInput);
@@ -22,7 +22,7 @@ function initEWay() {
 
       if ($cvv) {
         var cvvInput = document.createElement('input');
-        cvvInput.type = 'text';
+        cvvInput.type = 'hidden';
         cvvInput.name = paymentFormNamespace + '[encryptedCardCvv]';
         cvvInput.value = eCrypt.encryptValue($cvv.value, key);
         $form.appendChild(cvvInput);

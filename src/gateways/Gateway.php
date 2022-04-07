@@ -8,6 +8,7 @@ use craft\commerce\eway\EwayPaymentBundle;
 use craft\commerce\eway\models\EwayPaymentForm;
 use craft\commerce\models\payments\BasePaymentForm;
 use craft\commerce\omnipay\base\CreditCardGateway;
+use craft\helpers\App;
 use craft\helpers\Html;
 use craft\web\View;
 use Omnipay\Common\AbstractGateway;
@@ -22,6 +23,11 @@ use Throwable;
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @since     1.0
  *
+ * @property null|string $cSEKey
+ * @property bool|string $testMode
+ * @property bool|string $sendCartInfo
+ * @property null|string $apiKey
+ * @property null|string $password
  * @property-read null|string $settingsHtml
  */
 class Gateway extends CreditCardGateway
@@ -29,27 +35,22 @@ class Gateway extends CreditCardGateway
     /**
      * @var string|null
      */
-    public ?string $apiKey = null;
+    private ?string $_apiKey = null;
 
     /**
      * @var string|null
      */
-    public ?string $password = null;
+    private ?string $_password = null;
 
     /**
-     * @var boolean
+     * @var bool|string
      */
-    public bool $testMode = false;
+    private bool|string $_testMode = false;
 
     /**
      * @var string|null
      */
-    public ?string $CSEKey = null;
-
-    /**
-     * @var bool Whether cart information should be sent to the payment gateway
-     */
-    public bool $sendCartInfo = false;
+    private ?string $_CSEKey = null;
 
     /**
      * @inheritdoc
@@ -57,6 +58,100 @@ class Gateway extends CreditCardGateway
     public static function displayName(): string
     {
         return Craft::t('commerce', 'eWay Rapid');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettings(): array
+    {
+        $settings = parent::getSettings();
+        $settings['apiKey'] = $this->getApiKey(false);
+        $settings['password'] = $this->getPassword(false);
+        $settings['testMode'] = $this->getTestMode(false);
+        $settings['CSEKey'] = $this->getCSEKey(false);
+
+        return $settings;
+    }
+
+    /**
+     * @param bool $parse
+     * @return bool|string
+     * @since 4.0.0
+     */
+    public function getTestMode(bool $parse = true): bool|string
+    {
+        return $parse ? App::parseEnv($this->_testMode) : $this->_testMode;
+    }
+
+    /**
+     * @param bool|string $testMode
+     * @return void
+     * @since 4.0.0
+     */
+    public function setTestMode(bool|string $testMode): void
+    {
+        $this->_testMode = $testMode;
+    }
+
+    /**
+     * @param bool $parse
+     * @return string|null
+     * @since 4.0.0
+     */
+    public function getApiKey(bool $parse = true): ?string
+    {
+        return $parse ? App::parseEnv($this->_apiKey) : $this->_apiKey;
+    }
+
+    /**
+     * @param string|null $apiKey
+     * @return void
+     * @since 4.0.0
+     */
+    public function setApiKey(?string $apiKey): void
+    {
+        $this->_apiKey = $apiKey;
+    }
+
+    /**
+     * @param bool $parse
+     * @return string|null
+     * @since 4.0.0
+     */
+    public function getPassword(bool $parse = true): ?string
+    {
+        return $parse ? App::parseEnv($this->_password) : $this->_password;
+    }
+
+    /**
+     * @param string|null $password
+     * @return void
+     * @since 4.0.0
+     */
+    public function setPassword(?string $password): void
+    {
+        $this->_password = $password;
+    }
+
+    /**
+     * @param bool $parse
+     * @return string|null
+     * @since 4.0.0
+     */
+    public function getCSEKey(bool $parse = true): ?string
+    {
+        return $parse ? App::parseEnv($this->_CSEKey) : $this->_CSEKey;
+    }
+
+    /**
+     * @param string|null $CSEKey
+     * @return void
+     * @since 4.0.0
+     */
+    public function setCSEKey(?string $CSEKey): void
+    {
+        $this->_CSEKey = $CSEKey;
     }
 
     /**
@@ -114,9 +209,9 @@ class Gateway extends CreditCardGateway
         /** @var OmnipayGateway $gateway */
         $gateway = static::createOmnipayGateway($this->getGatewayClassName());
 
-        $gateway->setApiKey(Craft::parseEnv($this->apiKey));
-        $gateway->setPassword(Craft::parseEnv($this->password));
-        $gateway->setTestMode($this->testMode);
+        $gateway->setApiKey($this->getApiKey());
+        $gateway->setPassword($this->getPassword());
+        $gateway->setTestMode($this->getTestMode());
 
         return $gateway;
     }
