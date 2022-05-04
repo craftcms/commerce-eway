@@ -14,32 +14,24 @@ use craft\commerce\models\PaymentSource;
 class EwayPaymentForm extends CreditCardPaymentForm
 {
     /**
-     * @var string
+     * @var string|null
      */
-    public $encryptedCardNumber;
+    public ?string $encryptedCardNumber = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $encryptedCardCvv;
+    public ?string $encryptedCardCvv = null;
 
     /**
-     * @var string credit card reference
+     * @var string|null credit card reference
      */
-    public $cardReference;
-
-    /**
-     * @inheritdoc
-     */
-    public function setAttributes($values, $safeOnly = true)
-    {
-        parent::setAttributes($values, $safeOnly);
-    }
+    public ?string $cardReference = null;
 
     /**
      * @inheritdoc
      */
-    public function populateFromPaymentSource(PaymentSource $paymentSource)
+    public function populateFromPaymentSource(PaymentSource $paymentSource): void
     {
         $this->cardReference = $paymentSource->token;
     }

@@ -3,24 +3,33 @@ function initEWay() {
   if (typeof eCrypt === "undefined") {
     setTimeout(initEWay, 200);
   } else {
-    var $wrapper = $('.eway-form');
-    var $form = $wrapper.parents('form');
+    var $wrapper = document.querySelector('.eway-form');
+    var $form = document.querySelector('#paymentForm');
+    var paymentFormNamespace = $wrapper.dataset.paymentFormNamespace;
 
-    $form.on('submit', function (ev) {
-      $number = $form.find('[name=number]');
-      $cvv = $form.find('[name=cvv]');
-      var key = $wrapper.data('key');
+    $form.addEventListener('submit', function (ev) {
+      $number = $form.querySelector('[name="' + paymentFormNamespace + '[number]"]');
+      $cvv = $form.querySelector('[name="' + paymentFormNamespace + '[cvv]"]');
+      var key = $wrapper.dataset.key;
 
-      if ($number.length) {
-        $form.append('<input type="hidden" name="encryptedCardNumber" value="'+eCrypt.encryptValue($number.val(), key)+'"/>');
+      if ($number) {
+        var numInput = document.createElement('input');
+        numInput.type = 'hidden';
+        numInput.name = paymentFormNamespace + '[encryptedCardNumber]';
+        numInput.value = eCrypt.encryptValue($number.value, key);
+        $form.appendChild(numInput);
       }
 
-      if ($cvv.length) {
-        $form.append('<input type="hidden" name="encryptedCardCvv" value="' + eCrypt.encryptValue($cvv.val(), key) + '"/>');
+      if ($cvv) {
+        var cvvInput = document.createElement('input');
+        cvvInput.type = 'hidden';
+        cvvInput.name = paymentFormNamespace + '[encryptedCardCvv]';
+        cvvInput.value = eCrypt.encryptValue($cvv.value, key);
+        $form.appendChild(cvvInput);
       }
 
-      $number.prop('disabled', true);
-      $cvv.prop('disabled', true);
+      $number.disabled = true;
+      $cvv.disabled = true;
     });
   }
 }
