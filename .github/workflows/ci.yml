@@ -9,6 +9,8 @@ on:
     branches:
       - develop
       - '4.0'
+permissions:
+  contents: read
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
