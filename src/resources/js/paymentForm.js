@@ -1,6 +1,6 @@
 function initEWay() {
   // Because this might get executed before eWay is loaded.
-  if (typeof eCrypt === "undefined") {
+  if (typeof eCrypt === 'undefined') {
     setTimeout(initEWay, 200);
   } else {
     var $wrapper = document.querySelector('.eway-form');
@@ -8,7 +8,9 @@ function initEWay() {
     var paymentFormNamespace = $wrapper.dataset.paymentFormNamespace;
 
     $form.addEventListener('submit', function (ev) {
-      $number = $form.querySelector('[name="' + paymentFormNamespace + '[number]"]');
+      $number = $form.querySelector(
+        '[name="' + paymentFormNamespace + '[number]"]'
+      );
       $cvv = $form.querySelector('[name="' + paymentFormNamespace + '[cvv]"]');
       var key = $wrapper.dataset.key;
 
