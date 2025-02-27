@@ -1,5 +1,9 @@
 # Release Notes for eWay for Craft Commerce
 
+## Unreleased
+
+- Fixed a bug where payments could not be made from the Edit Order page.
+
 ## 4.1.0 - 2024-08-16
 
 ### Added
