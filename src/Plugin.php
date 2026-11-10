@@ -1,36 +1,23 @@
 <?php
 
-namespace craft\commerce\eway;
+declare(strict_types=1);
 
-use craft\commerce\eway\gateways\Gateway;
-use craft\commerce\services\Gateways;
-use craft\events\RegisterComponentTypesEvent;
-use yii\base\Event;
+namespace CraftCms\CommerceEway;
+
+use CraftCms\Cms\Plugin\Plugin as BasePlugin;
+use CraftCms\Commerce\Payment\Gateway\GatewayTypes;
 
 /**
- * Plugin proved eWay integration for Commerce.
- *
- * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since  1.0
+ * eWAY for Craft Commerce.
  */
-class Plugin extends \craft\base\Plugin
+class Plugin extends BasePlugin
 {
-    // Public Methods
-    // =========================================================================
+    public string $schemaVersion = '5.0.0';
 
-    /**
-     * @inheritdoc
-     */
-    public function init(): void
+    public string $minVersionRequired = '4.1.1';
+
+    public function boot(GatewayTypes $gatewayTypes): void
     {
-        parent::init();
-
-        Event::on(
-            Gateways::class,
-            Gateways::EVENT_REGISTER_GATEWAY_TYPES,
-            function(RegisterComponentTypesEvent $event) {
-                $event->types[] = Gateway::class;
-            }
-        );
+        $gatewayTypes->register(Gateway::class);
     }
 }
