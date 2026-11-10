@@ -4,4 +4,7 @@
 *.DS_Store
 *.orig
 *Thumbs.db
-vendor/
+/vendor/
+/node_modules/
+/.phpunit.cache/
+/composer.lock

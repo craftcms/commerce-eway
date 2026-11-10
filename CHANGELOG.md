@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+> [!WARNING]
+> This release requires Craft Commerce 6. See [UPGRADE.md](UPGRADE.md) for the breaking changes.
+
+- eWay for Craft Commerce now requires Craft CMS 6, Craft Commerce 6 and PHP 8.5.
+- The plugin now uses the eWAY Rapid API directly, and no longer requires `craftcms/commerce-omnipay` or `omnipay/eway`.
+- Moved all classes to the `CraftCms\CommerceEway` namespace. `craft\commerce\eway\gateways\Gateway` is kept as an alias of `CraftCms\CommerceEway\Gateway`.
+- Added `CraftCms\CommerceEway\Events\PaymentRequestBuilding`, which replaces the Omnipay request events.
+- The payment form and the payment confirmation form are now built with `paymentFormUi()` and `paymentConfirmationFormUi()`, rather than templates.
+- Errors for the encrypted card number and CVV are now shown on the card number and CVV inputs.
+- Removed `craft\commerce\eway\EwayPaymentBundle`.
+
+## 4.1.1 - 2025-02-27
+
 - Fixed a bug where payments could not be made from the Edit Order page.
 
 ## 4.1.0 - 2024-08-16
